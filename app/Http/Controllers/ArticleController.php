@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $page = $request->input('p', 1);
+        $articles = Article::orderBy("created_at","desc")->paginate(perPage: 10, page: $page);
+        return view('articles', ['articles' => $articles]);
     }
 
     /**
