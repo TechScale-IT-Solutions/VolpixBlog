@@ -17,4 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::resource('articles', \App\Http\Controllers\ArticleController::class);
+Route::resource('articles.comments', \App\Http\Controllers\CommentController::class)->except(['show']);
+
 require __DIR__.'/auth.php';
